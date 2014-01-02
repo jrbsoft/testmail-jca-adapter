@@ -51,38 +51,35 @@ public class GreenMailResourceAdapter implements ResourceAdapter, java.io.Serial
 	/** The logger */
 	private static Logger log = Logger.getLogger(GreenMailResourceAdapter.class.getName());
 
+	/** The GreenMail instance, if started */
 	private GreenMail greenMail = null;
 
-	/** port */
-	@ConfigProperty(defaultValue = "3025")
-	private Integer port;
-
+	/** protocols */
+	@ConfigProperty(defaultValue = "smtp:3025")
+	private String protocols;
+	
 	/**
 	 * Default constructor
 	 */
 	public GreenMailResourceAdapter() {
-
-	}
-
-	/**
-	 * Set port
-	 * 
-	 * @param port
-	 *            The value
-	 */
-	public void setPort(Integer port) {
-		this.port = port;
-	}
-
-	/**
-	 * Get port
-	 * 
-	 * @return The value
-	 */
-	public Integer getPort() {
-		return port;
 	}
 	
+	/**
+	 * Returns the configured protocols.
+	 * @return The value
+	 */
+	public String getProtocols() {
+		return protocols;
+	}
+
+	/**
+	 * Sets the protocols.
+	 * @param protocols as comma separated list. Supported are: smtp, smtps, pop3, pop3s, imap, imaps
+	 */
+	public void setProtocols(String protocols) {
+		this.protocols = protocols;
+	}
+
 	public GreenMail getGreenMail() {
 		return greenMail;
 	}
@@ -90,14 +87,11 @@ public class GreenMailResourceAdapter implements ResourceAdapter, java.io.Serial
 	/**
 	 * This is called during the activation of a message endpoint.
 	 * 
-	 * @param endpointFactory
-	 *            A message endpoint factory instance.
-	 * @param spec
-	 *            An activation spec JavaBean instance.
-	 * @throws ResourceException
-	 *             generic exception
+	 * @param endpointFactory A message endpoint factory instance.
+	 * @param spec An activation spec JavaBean instance.
+	 * @throws ResourceException generic exception
 	 */
-	public void endpointActivation(MessageEndpointFactory endpointFactory, ActivationSpec spec) throws ResourceException {
+	public void endpointActivation(final MessageEndpointFactory endpointFactory, final ActivationSpec spec) throws ResourceException {
 		log.finest("endpointActivation()");
 
 	}
@@ -105,12 +99,10 @@ public class GreenMailResourceAdapter implements ResourceAdapter, java.io.Serial
 	/**
 	 * This is called when a message endpoint is deactivated.
 	 * 
-	 * @param endpointFactory
-	 *            A message endpoint factory instance.
-	 * @param spec
-	 *            An activation spec JavaBean instance.
+	 * @param endpointFactory A message endpoint factory instance.
+	 * @param spec An activation spec JavaBean instance.
 	 */
-	public void endpointDeactivation(MessageEndpointFactory endpointFactory, ActivationSpec spec) {
+	public void endpointDeactivation(final MessageEndpointFactory endpointFactory, final ActivationSpec spec) {
 		log.finest("endpointDeactivation()");
 
 	}
@@ -118,15 +110,12 @@ public class GreenMailResourceAdapter implements ResourceAdapter, java.io.Serial
 	/**
 	 * This is called when a resource adapter instance is bootstrapped.
 	 * 
-	 * @param ctx
-	 *            A bootstrap context containing references
-	 * @throws ResourceAdapterInternalException
-	 *             indicates bootstrap failure.
+	 * @param ctx A bootstrap context containing references
+	 * @throws ResourceAdapterInternalException indicates bootstrap failure.
 	 */
-	public void start(BootstrapContext ctx) throws ResourceAdapterInternalException {
+	public void start(final BootstrapContext ctx) throws ResourceAdapterInternalException {
 		log.finest("start()");
-
-		final ServerSetup setup = new ServerSetup(getPort(), null, ServerSetup.PROTOCOL_SMTP);
+		final ServerSetup[] setup = getSetup();
 		greenMail = new GreenMail(setup);
 		greenMail.start();
 	}
@@ -143,13 +132,11 @@ public class GreenMailResourceAdapter implements ResourceAdapter, java.io.Serial
 	/**
 	 * This method is called by the application server during crash recovery.
 	 * 
-	 * @param specs
-	 *            An array of ActivationSpec JavaBeans
-	 * @throws ResourceException
-	 *             generic exception
+	 * @param specs An array of ActivationSpec JavaBeans
+	 * @throws ResourceException generic exception
 	 * @return An array of XAResource objects
 	 */
-	public XAResource[] getXAResources(ActivationSpec[] specs) throws ResourceException {
+	public XAResource[] getXAResources(final ActivationSpec[] specs) throws ResourceException {
 		log.finest("getXAResources()");
 		return null;
 	}
@@ -162,38 +149,61 @@ public class GreenMailResourceAdapter implements ResourceAdapter, java.io.Serial
 	@Override
 	public int hashCode() {
 		int result = 17;
-		if (port != null)
-			result += 31 * result + 7 * port.hashCode();
-		else
+		if (protocols != null) {
+			result += 31 * result + 7 * protocols.hashCode();
+		} else {
 			result += 31 * result + 7;
+		}
 		return result;
 	}
 
 	/**
 	 * Indicates whether some other object is equal to this one.
 	 * 
-	 * @param other
-	 *            The reference object with which to compare.
-	 * @return true if this object is the same as the obj argument, false
-	 *         otherwise.
+	 * @param other The reference object with which to compare.
+	 * @return true if this object is the same as the obj argument, false otherwise.
 	 */
 	@Override
-	public boolean equals(Object other) {
-		if (other == null)
+	public boolean equals(final Object other) {
+		if (other == null) {
 			return false;
-		if (other == this)
+		}
+		if (other == this) {
 			return true;
-		if (!(other instanceof GreenMailResourceAdapter))
+		}
+		if (!(other instanceof GreenMailResourceAdapter)) {
 			return false;
+		}
+		
 		boolean result = true;
-		GreenMailResourceAdapter obj = (GreenMailResourceAdapter) other;
+		final GreenMailResourceAdapter obj = (GreenMailResourceAdapter) other;
 		if (result) {
-			if (port == null)
-				result = obj.getPort() == null;
-			else
-				result = port.equals(obj.getPort());
+			if (protocols == null) {
+				result = obj.getProtocols() == null;
+			} else {
+				result = protocols.equals(obj.getProtocols());
+			}
 		}
 		return result;
 	}
 
+	//-----------------------------------------------------------------------||
+	//-- Private Methods ----------------------------------------------------||
+	//-----------------------------------------------------------------------||
+	
+	private ServerSetup[] getSetup() {
+		final String[] items = protocols.split(",", -1);
+		final ServerSetup[] protocolSetups = new ServerSetup[items.length];
+		for (int i = 0 ; i < items.length; i++) {
+			String item = items[i];
+			final String[] subitem = item.split(":", -1);
+			if (subitem.length == 2) {
+				final String protocol = subitem[0];
+				final String port = subitem[1];
+				protocolSetups[i] = new ServerSetup(Integer.valueOf(port), null, protocol);
+			}
+		}		
+		return protocolSetups;
+	}
+	
 }

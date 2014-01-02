@@ -30,82 +30,78 @@ import javax.resource.spi.ConnectionManager;
 
 /**
  * GreenMailConnectionFactoryImpl
- *
+ * 
  * @version $Revision: $
  */
-public class GreenMailConnectionFactoryImpl implements IGreenMailConnectionFactory
-{
-   /** The serial version UID */
-   private static final long serialVersionUID = 1L;
+public class GreenMailConnectionFactoryImpl implements IGreenMailConnectionFactory {
+	
+	/** The serial version UID */
+	private static final long serialVersionUID = 1L;
 
-   /** The logger */
-   private static Logger log = Logger.getLogger(GreenMailConnectionFactoryImpl.class.getName());
+	/** The logger */
+	private static Logger log = Logger.getLogger(GreenMailConnectionFactoryImpl.class.getName());
 
-   /** Reference */
-   private Reference reference;
+	/** Reference */
+	private Reference reference;
 
-   /** ManagedConnectionFactory */
-   private GreenMailManagedConnectionFactory mcf;
+	/** ManagedConnectionFactory */
+	private GreenMailManagedConnectionFactory mcf;
 
-   /** ConnectionManager */
-   private ConnectionManager connectionManager;
+	/** ConnectionManager */
+	private ConnectionManager connectionManager;
 
-   /**
-    * Default constructor
-    */
-   public GreenMailConnectionFactoryImpl()
-   {
+	/**
+	 * Default constructor
+	 */
+	public GreenMailConnectionFactoryImpl() {
+	}
 
-   }
+	/**
+	 * Default constructor
+	 * 
+	 * @param mcf
+	 *            ManagedConnectionFactory
+	 * @param cxManager
+	 *            ConnectionManager
+	 */
+	public GreenMailConnectionFactoryImpl(final GreenMailManagedConnectionFactory mcf, final ConnectionManager cxManager) {
+		this.mcf = mcf;
+		this.connectionManager = cxManager;
+	}
 
-   /**
-    * Default constructor
-    * @param mcf ManagedConnectionFactory
-    * @param cxManager ConnectionManager
-    */
-   public GreenMailConnectionFactoryImpl(GreenMailManagedConnectionFactory mcf, ConnectionManager cxManager)
-   {
-      this.mcf = mcf;
-      this.connectionManager = cxManager;
-   }
+	/**
+	 * Get connection from factory
+	 * 
+	 * @return GreenMailConnection instance
+	 * @exception ResourceException Thrown if a connection can't be obtained
+	 */
+	@Override
+	public IGreenMailConnection getConnection() throws ResourceException {
+		log.finest("getConnection()");
+		return (IGreenMailConnection) connectionManager.allocateConnection(mcf, null);
+	}
 
-   /** 
-    * Get connection from factory
-    *
-    * @return GreenMailConnection instance
-    * @exception ResourceException Thrown if a connection can't be obtained
-    */
-   @Override
-   public IGreenMailConnection getConnection() throws ResourceException
-   {
-      log.finest("getConnection()");
-      return (IGreenMailConnection)connectionManager.allocateConnection(mcf, null);
-   }
+	/**
+	 * Get the Reference instance.
+	 * 
+	 * @return Reference instance
+	 * @exception NamingException Thrown if a reference can't be obtained
+	 */
+	@Override
+	public Reference getReference() throws NamingException {
+		log.finest("getReference()");
+		return reference;
+	}
 
-   /**
-    * Get the Reference instance.
-    *
-    * @return Reference instance
-    * @exception NamingException Thrown if a reference can't be obtained
-    */
-   @Override
-   public Reference getReference() throws NamingException
-   {
-      log.finest("getReference()");
-      return reference;
-   }
-
-   /**
-    * Set the Reference instance.
-    *
-    * @param reference A Reference instance
-    */
-   @Override
-   public void setReference(Reference reference)
-   {
-      log.finest("setReference()");
-      this.reference = reference;
-   }
-
+	/**
+	 * Set the Reference instance.
+	 * 
+	 * @param reference A Reference instance
+	 */
+	@Override
+	public void setReference(final Reference reference) {
+		log.finest("setReference()");
+		this.reference = reference;
+	}
 
 }

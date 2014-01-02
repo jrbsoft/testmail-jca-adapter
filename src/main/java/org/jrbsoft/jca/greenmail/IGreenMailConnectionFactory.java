@@ -34,11 +34,9 @@ import javax.resource.ResourceException;
 public interface IGreenMailConnectionFactory extends Serializable, Referenceable {
 	
 	/**
-	 * Get connection from factory
-	 * 
+	 * Get connection from factory.
 	 * @return GreenMailConnection instance
-	 * @exception ResourceException
-	 *                Thrown if a connection can't be obtained
+	 * @exception ResourceException Thrown if a connection can't be obtained
 	 */
 	public IGreenMailConnection getConnection() throws ResourceException;
 

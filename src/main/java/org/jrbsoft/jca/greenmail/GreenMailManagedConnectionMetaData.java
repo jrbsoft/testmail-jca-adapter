@@ -40,7 +40,6 @@ public class GreenMailManagedConnectionMetaData implements ManagedConnectionMeta
 	 * Default constructor
 	 */
 	public GreenMailManagedConnectionMetaData() {
-
 	}
 
 	/**
@@ -48,8 +47,7 @@ public class GreenMailManagedConnectionMetaData implements ManagedConnectionMeta
 	 * ManagedConnection.
 	 * 
 	 * @return Product name of the EIS instance
-	 * @throws ResourceException
-	 *             Thrown if an error occurs
+	 * @throws ResourceException Thrown if an error occurs
 	 */
 	@Override
 	public String getEISProductName() throws ResourceException {
@@ -62,8 +60,7 @@ public class GreenMailManagedConnectionMetaData implements ManagedConnectionMeta
 	 * the ManagedConnection.
 	 * 
 	 * @return Product version of the EIS instance
-	 * @throws ResourceException
-	 *             Thrown if an error occurs
+	 * @throws ResourceException Thrown if an error occurs
 	 */
 	@Override
 	public String getEISProductVersion() throws ResourceException {
@@ -75,8 +72,7 @@ public class GreenMailManagedConnectionMetaData implements ManagedConnectionMeta
 	 * Returns maximum limit on number of active concurrent connections
 	 * 
 	 * @return Maximum limit for number of active concurrent connections
-	 * @throws ResourceException
-	 *             Thrown if an error occurs
+	 * @throws ResourceException Thrown if an error occurs
 	 */
 	@Override
 	public int getMaxConnections() throws ResourceException {
@@ -88,8 +84,7 @@ public class GreenMailManagedConnectionMetaData implements ManagedConnectionMeta
 	 * Returns name of the user associated with the ManagedConnection instance
 	 * 
 	 * @return Name of the user
-	 * @throws ResourceException
-	 *             Thrown if an error occurs
+	 * @throws ResourceException Thrown if an error occurs
 	 */
 	@Override
 	public String getUserName() throws ResourceException {

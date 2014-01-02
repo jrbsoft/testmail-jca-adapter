@@ -52,17 +52,10 @@ public class GreenMailConnectionImpl implements IGreenMailConnection {
 	 * @param mcf
 	 *            GreenMailManagedConnectionFactory
 	 */
-	public GreenMailConnectionImpl(GreenMailManagedConnection mc, GreenMailManagedConnectionFactory mcf) {
+	public GreenMailConnectionImpl(final GreenMailManagedConnection mc, final GreenMailManagedConnectionFactory mcf) {
 		this.mc = mc;
 		this.mcf = mcf;
 	}
-
-//	/**
-//	 * Call me
-//	 */
-//	public void callMe() {
-//		mc.callMe();
-//	}
 
 	/**
 	 * Close
@@ -72,12 +65,12 @@ public class GreenMailConnectionImpl implements IGreenMailConnection {
 	}
 
 	@Override
-	public GreenMailUser setUser(String email, String password) {
+	public GreenMailUser setUser(final String email, final String password) {
 		return mc.setUser(email, password);
 	}
 
 	@Override
-	public GreenMailUser setUser(String email, String login, String password) {
+	public GreenMailUser setUser(final String email, final String login, final String password) {
 		return mc.setUser(email, login, password);
 	}
 

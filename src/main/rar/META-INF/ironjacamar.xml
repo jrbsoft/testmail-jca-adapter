@@ -26,7 +26,7 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.ironjacamar.org/doc/schema 
              http://www.ironjacamar.org/doc/schema/ironjacamar_1_1.xsd">
-  <config-property name="port">3025</config-property>
+  <config-property name="protocols">smtp:3025</config-property>
 
   <transaction-support>NoTransaction</transaction-support>
   

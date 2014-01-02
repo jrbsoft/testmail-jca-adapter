@@ -30,104 +30,97 @@ import javax.resource.cci.ResourceAdapterMetaData;
  * @version $Revision: $
  */
 public class GreenMailRaMetaData implements ResourceAdapterMetaData {
+	private static final String ADAPTER_VENDOR_VERSION = "0.0.1-SNAPSHOT";
+	private static final String ADAPTER_VENDOR_NAME = "jrbsoft";
+	private static final String ADAPTER_NAME = "GreenMail JCA Adapter";
+	private static final String ADAPTER_SHORT_DESCRIPTION = "Used for java mail specific in-container tests";
+	private static final String SPEC_VERSION = "1.6";
 	
 	/**
 	 * Default constructor
 	 */
 	public GreenMailRaMetaData() {
-
 	}
 
 	/**
 	 * Gets the version of the resource adapter.
-	 * 
 	 * @return String representing version of the resource adapter
 	 */
 	@Override
 	public String getAdapterVersion() {
-		return null; // TODO
+		return ADAPTER_VENDOR_VERSION;
 	}
 
 	/**
 	 * Gets the name of the vendor that has provided the resource adapter.
-	 * 
 	 * @return String representing name of the vendor
 	 */
 	@Override
 	public String getAdapterVendorName() {
-		return null; // TODO
+		return ADAPTER_VENDOR_NAME;
 	}
 
 	/**
 	 * Gets a tool displayable name of the resource adapter.
-	 * 
 	 * @return String representing the name of the resource adapter
 	 */
 	@Override
 	public String getAdapterName() {
-		return null; // TODO
+		return ADAPTER_NAME;
 	}
 
 	/**
 	 * Gets a tool displayable short desription of the resource adapter.
-	 * 
 	 * @return String describing the resource adapter
 	 */
 	@Override
 	public String getAdapterShortDescription() {
-		return null; // TODO
+		return ADAPTER_SHORT_DESCRIPTION;
 	}
 
 	/**
-	 * Returns a string representation of the version
-	 * 
-	 * @return String representing the supported version of the connector
-	 *         architecture
+	 * Returns a string representation of the version.
+	 * @return String representing the supported version of the connector architecture
 	 */
 	@Override
 	public String getSpecVersion() {
-		return null; // TODO
+		return SPEC_VERSION;
 	}
 
 	/**
-	 * Returns an array of fully-qualified names of InteractionSpec
-	 * 
+	 * Returns an array of fully-qualified names of InteractionSpec.
 	 * @return Array of fully-qualified class names of InteractionSpec classes
 	 */
 	@Override
 	public String[] getInteractionSpecsSupported() {
-		return null; // TODO
+		return null;
 	}
 
 	/**
-	 * Returns true if the implementation class for the Interaction
-	 * 
+	 * Returns true if the implementation class for the Interaction.
 	 * @return boolean Depending on method support
 	 */
 	@Override
 	public boolean supportsExecuteWithInputAndOutputRecord() {
-		return false; // TODO
+		return false;
 	}
 
 	/**
-	 * Returns true if the implementation class for the Interaction
-	 * 
+	 * Returns true if the implementation class for the Interaction.
 	 * @return boolean Depending on method support
 	 */
 	@Override
 	public boolean supportsExecuteWithInputRecordOnly() {
-		return false; // TODO
+		return false;
 	}
 
 	/**
-	 * Returns true if the resource adapter implements the LocalTransaction
-	 * 
-	 * @return true If resource adapter supports resource manager local
-	 *         transaction demarcation
+	 * Returns true if the resource adapter implements the LocalTransaction.
+	 * @return true If resource adapter supports resource manager local transaction demarcation
 	 */
 	@Override
 	public boolean supportsLocalTransactionDemarcation() {
-		return false; // TODO
+		return false;
 	}
 
 }

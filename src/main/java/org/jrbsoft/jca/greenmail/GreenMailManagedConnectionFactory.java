@@ -70,15 +70,11 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 	/**
 	 * Creates a Connection Factory instance.
 	 * 
-	 * @param cxManager
-	 *            ConnectionManager to be associated with created EIS connection
-	 *            factory instance
-	 * @return EIS-specific Connection Factory instance or
-	 *         javax.resource.cci.ConnectionFactory instance
-	 * @throws ResourceException
-	 *             Generic exception
+	 * @param cxManager ConnectionManager to be associated with created EIS connection factory instance
+	 * @return EIS-specific Connection Factory instance or javax.resource.cci.ConnectionFactory instance
+	 * @throws ResourceException Generic exception
 	 */
-	public Object createConnectionFactory(ConnectionManager cxManager) throws ResourceException {
+	public Object createConnectionFactory(final ConnectionManager cxManager) throws ResourceException {
 		log.finest("createConnectionFactory()");
 		return new GreenMailConnectionFactoryImpl(this, cxManager);
 	}
@@ -86,8 +82,7 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 	/**
 	 * Creates a Connection Factory instance.
 	 * 
-	 * @return EIS-specific Connection Factory instance or
-	 *         javax.resource.cci.ConnectionFactory instance
+	 * @return EIS-specific Connection Factory instance or javax.resource.cci.ConnectionFactory instance
 	 * @throws ResourceException
 	 *             Generic exception
 	 */
@@ -98,16 +93,12 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 	/**
 	 * Creates a new physical connection to the underlying EIS resource manager.
 	 * 
-	 * @param subject
-	 *            Caller's security information
-	 * @param cxRequestInfo
-	 *            Additional resource adapter specific connection request
-	 *            information
-	 * @throws ResourceException
-	 *             generic exception
+	 * @param subject Caller's security information
+	 * @param cxRequestInfo Additional resource adapter specific connection request information
+	 * @throws ResourceException generic exception
 	 * @return ManagedConnection instance
 	 */
-	public ManagedConnection createManagedConnection(Subject subject, ConnectionRequestInfo cxRequestInfo) throws ResourceException {
+	public ManagedConnection createManagedConnection(final Subject subject, final ConnectionRequestInfo cxRequestInfo) throws ResourceException {
 		log.finest("createManagedConnection()");
 		return new GreenMailManagedConnection(this);
 	}
@@ -115,24 +106,18 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 	/**
 	 * Returns a matched connection from the candidate set of connections.
 	 * 
-	 * @param connectionSet
-	 *            Candidate connection set
-	 * @param subject
-	 *            Caller's security information
-	 * @param cxRequestInfo
-	 *            Additional resource adapter specific connection request
-	 *            information
-	 * @throws ResourceException
-	 *             generic exception
-	 * @return ManagedConnection if resource adapter finds an acceptable match
-	 *         otherwise null
+	 * @param connectionSet Candidate connection set
+	 * @param subject Caller's security information
+	 * @param cxRequestInfo Additional resource adapter specific connection request information
+	 * @throws ResourceException generic exception
+	 * @return ManagedConnection if resource adapter finds an acceptable match otherwise null
 	 */
-	public ManagedConnection matchManagedConnections(Set connectionSet, Subject subject, ConnectionRequestInfo cxRequestInfo) throws ResourceException {
+	public ManagedConnection matchManagedConnections(final Set connectionSet, final Subject subject, final ConnectionRequestInfo cxRequestInfo) throws ResourceException {
 		log.finest("matchManagedConnections()");
 		ManagedConnection result = null;
-		Iterator it = connectionSet.iterator();
+		final Iterator it = connectionSet.iterator();
 		while (result == null && it.hasNext()) {
-			ManagedConnection mc = (ManagedConnection) it.next();
+			final ManagedConnection mc = (ManagedConnection) it.next();
 			if (mc instanceof GreenMailManagedConnection) {
 				result = mc;
 			}
@@ -145,8 +130,7 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 	 * Get the log writer for this ManagedConnectionFactory instance.
 	 * 
 	 * @return PrintWriter
-	 * @throws ResourceException
-	 *             generic exception
+	 * @throws ResourceException generic exception
 	 */
 	public PrintWriter getLogWriter() throws ResourceException {
 		log.finest("getLogWriter()");
@@ -156,12 +140,10 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 	/**
 	 * Set the log writer for this ManagedConnectionFactory instance.
 	 * 
-	 * @param out
-	 *            PrintWriter - an out stream for error logging and tracing
-	 * @throws ResourceException
-	 *             generic exception
+	 * @param out PrintWriter - an out stream for error logging and tracing
+	 * @throws ResourceException generic exception
 	 */
-	public void setLogWriter(PrintWriter out) throws ResourceException {
+	public void setLogWriter(final PrintWriter out) throws ResourceException {
 		log.finest("setLogWriter()");
 		logwriter = out;
 	}
@@ -179,10 +161,9 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 	/**
 	 * Set the resource adapter
 	 * 
-	 * @param ra
-	 *            The handle
+	 * @param ra The handle
 	 */
-	public void setResourceAdapter(ResourceAdapter ra) {
+	public void setResourceAdapter(final ResourceAdapter ra) {
 		log.finest("setResourceAdapter()");
 		this.ra = ra;
 	}
@@ -201,19 +182,20 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 	/**
 	 * Indicates whether some other object is equal to this one.
 	 * 
-	 * @param other
-	 *            The reference object with which to compare.
-	 * @return true if this object is the same as the obj argument, false
-	 *         otherwise.
+	 * @param other The reference object with which to compare.
+	 * @return true if this object is the same as the obj argument, false otherwise.
 	 */
 	@Override
 	public boolean equals(Object other) {
-		if (other == null)
+		if (other == null) {
 			return false;
-		if (other == this)
+		}
+		if (other == this) {
 			return true;
-		if (!(other instanceof GreenMailManagedConnectionFactory))
+		}
+		if (!(other instanceof GreenMailManagedConnectionFactory)) {
 			return false;
+		}
 		boolean result = true;
 		return result;
 	}

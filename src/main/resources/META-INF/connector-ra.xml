@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connector xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+http://java.sun.com/xml/ns/j2ee/connector_1_6.xsd"
+	version="1.6">
+
+	<resource-adapters>
+		<resource-adapter>
+			<archive>greenMailAdapter.rar</archive>
+			<connection-definitions>
+				<connection-definition class-name="org.jrbsoft.jca.greenmail.GreenMailManagedConnectionFactory"
+					jndi-name="java:jboss/jca/GreenMailConnectionFactory" pool-name="GreenMailConnectionFactory">
+				</connection-definition>
+			</connection-definitions>
+		</resource-adapter>
+	</resource-adapters>
+
+</connector>

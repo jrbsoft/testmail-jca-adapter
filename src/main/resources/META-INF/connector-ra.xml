@@ -8,8 +8,8 @@ http://java.sun.com/xml/ns/j2ee/connector_1_6.xsd"
 		<resource-adapter>
 			<archive>greenMailAdapter.rar</archive>
 			<connection-definitions>
-				<connection-definition class-name="org.jrbsoft.jca.greenmail.GreenMailManagedConnectionFactory"
-					jndi-name="java:jboss/jca/GreenMailConnectionFactory" pool-name="GreenMailConnectionFactory">
+				<connection-definition class-name="org.jrbsoft.jca.testmail.TestMailManagedConnectionFactory"
+					jndi-name="java:jboss/jca/TestMailConnectionFactory" pool-name="TestMailConnectionFactory">
 				</connection-definition>
 			</connection-definitions>
 		</resource-adapter>

@@ -19,27 +19,25 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jrbsoft.jca.greenmail;
+package org.jrbsoft.jca.testmail;
 
-import javax.mail.internet.MimeMessage;
+import java.io.Serializable;
 
-import com.icegreen.greenmail.user.GreenMailUser;
-import com.icegreen.greenmail.util.GreenMailUtil;
-
+import javax.resource.Referenceable;
+import javax.resource.ResourceException;
 
 /**
- * GreenMailConnection
+ * GreenMailConnectionFactory
  * 
  * @version $Revision: $
  */
-public interface IGreenMailConnection {
+public interface ITestMailConnectionFactory extends Serializable, Referenceable {
 	
-	public GreenMailUser setUser(String email, String password);
+	/**
+	 * Get connection from factory.
+	 * @return GreenMailConnection instance
+	 * @exception ResourceException Thrown if a connection can't be obtained
+	 */
+	public ITestMailConnection getConnection() throws ResourceException;
 
-    public GreenMailUser setUser(String email, String login, String password);
-    
-    public MimeMessage[] getReceivedMessages();
-    
-    public GreenMailUtil util();
-    
 }

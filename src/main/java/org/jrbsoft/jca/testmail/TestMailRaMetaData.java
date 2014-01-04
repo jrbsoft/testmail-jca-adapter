@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jrbsoft.jca.greenmail;
+package org.jrbsoft.jca.testmail;
 
 import javax.resource.cci.ResourceAdapterMetaData;
 
@@ -29,7 +29,7 @@ import javax.resource.cci.ResourceAdapterMetaData;
  * 
  * @version $Revision: $
  */
-public class GreenMailRaMetaData implements ResourceAdapterMetaData {
+public class TestMailRaMetaData implements ResourceAdapterMetaData {
 	private static final String ADAPTER_VENDOR_VERSION = "0.0.1-SNAPSHOT";
 	private static final String ADAPTER_VENDOR_NAME = "jrbsoft";
 	private static final String ADAPTER_NAME = "GreenMail JCA Adapter";
@@ -39,7 +39,7 @@ public class GreenMailRaMetaData implements ResourceAdapterMetaData {
 	/**
 	 * Default constructor
 	 */
-	public GreenMailRaMetaData() {
+	public TestMailRaMetaData() {
 	}
 
 	/**

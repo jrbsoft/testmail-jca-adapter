@@ -19,8 +19,11 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jrbsoft.jca.greenmail;
+package org.jrbsoft.jca.testmail;
 
+import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Logger;
 
 import javax.resource.ResourceException;
@@ -34,6 +37,8 @@ import javax.resource.spi.TransactionSupport;
 import javax.resource.spi.endpoint.MessageEndpointFactory;
 import javax.transaction.xa.XAResource;
 
+import com.icegreen.greenmail.user.GreenMailUser;
+import com.icegreen.greenmail.user.UserException;
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetup;
 
@@ -43,13 +48,15 @@ import com.icegreen.greenmail.util.ServerSetup;
  * @version $Revision: $
  */
 @Connector(reauthenticationSupport = false, transactionSupport = TransactionSupport.TransactionSupportLevel.NoTransaction)
-public class GreenMailResourceAdapter implements ResourceAdapter, java.io.Serializable {
+public class TestMailResourceAdapter implements ResourceAdapter, java.io.Serializable {
 
 	/** The serial version UID */
 	private static final long serialVersionUID = 1L;
 
 	/** The logger */
-	private static Logger log = Logger.getLogger(GreenMailResourceAdapter.class.getName());
+	private static Logger log = Logger.getLogger(TestMailResourceAdapter.class.getName());
+	
+	private ConcurrentMap<String, GreenMailUser> userMap = new ConcurrentHashMap<String, GreenMailUser>();
 
 	/** The GreenMail instance, if started */
 	private GreenMail greenMail = null;
@@ -61,7 +68,7 @@ public class GreenMailResourceAdapter implements ResourceAdapter, java.io.Serial
 	/**
 	 * Default constructor
 	 */
-	public GreenMailResourceAdapter() {
+	public TestMailResourceAdapter() {
 	}
 	
 	/**
@@ -171,12 +178,12 @@ public class GreenMailResourceAdapter implements ResourceAdapter, java.io.Serial
 		if (other == this) {
 			return true;
 		}
-		if (!(other instanceof GreenMailResourceAdapter)) {
+		if (!(other instanceof TestMailResourceAdapter)) {
 			return false;
 		}
 		
 		boolean result = true;
-		final GreenMailResourceAdapter obj = (GreenMailResourceAdapter) other;
+		final TestMailResourceAdapter obj = (TestMailResourceAdapter) other;
 		if (result) {
 			if (protocols == null) {
 				result = obj.getProtocols() == null;
@@ -186,7 +193,7 @@ public class GreenMailResourceAdapter implements ResourceAdapter, java.io.Serial
 		}
 		return result;
 	}
-
+	
 	//-----------------------------------------------------------------------||
 	//-- Private Methods ----------------------------------------------------||
 	//-----------------------------------------------------------------------||

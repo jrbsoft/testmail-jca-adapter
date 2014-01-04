@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jrbsoft.jca.greenmail;
+package org.jrbsoft.jca.testmail;
 
 import java.util.logging.Logger;
 
@@ -31,15 +31,15 @@ import javax.resource.spi.ManagedConnectionMetaData;
  * 
  * @version $Revision: $
  */
-public class GreenMailManagedConnectionMetaData implements ManagedConnectionMetaData {
+public class TestMailManagedConnectionMetaData implements ManagedConnectionMetaData {
 	
 	/** The logger */
-	private static Logger log = Logger.getLogger(GreenMailManagedConnectionMetaData.class.getName());
+	private static Logger log = Logger.getLogger(TestMailManagedConnectionMetaData.class.getName());
 
 	/**
 	 * Default constructor
 	 */
-	public GreenMailManagedConnectionMetaData() {
+	public TestMailManagedConnectionMetaData() {
 	}
 
 	/**

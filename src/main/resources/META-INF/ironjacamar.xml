@@ -31,7 +31,7 @@
   <transaction-support>NoTransaction</transaction-support>
   
   <connection-definitions>
-    <connection-definition class-name="org.jrbsoft.jca.greenmail.GreenMailManagedConnectionFactory" jndi-name="java:/eis/GreenMailConnectionFactory" pool-name="GreenMailConnectionFactory">
+    <connection-definition class-name="org.jrbsoft.jca.testmail.TestMailManagedConnectionFactory" jndi-name="java:/eis/TestMailConnectionFactory" pool-name="TestMailConnectionFactory">
     </connection-definition>
   </connection-definitions>
 

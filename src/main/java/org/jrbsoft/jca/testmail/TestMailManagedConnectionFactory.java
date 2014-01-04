@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jrbsoft.jca.greenmail;
+package org.jrbsoft.jca.testmail;
 
 import java.io.PrintWriter;
 import java.util.Iterator;
@@ -42,17 +42,17 @@ import javax.security.auth.Subject;
  * @version $Revision: $
  */
 @ConnectionDefinition(
-		connectionFactory = IGreenMailConnectionFactory.class, 
-		connectionFactoryImpl = GreenMailConnectionFactoryImpl.class,
-		connection = IGreenMailConnection.class, 
-		connectionImpl = GreenMailConnectionImpl.class)
-public class GreenMailManagedConnectionFactory implements ManagedConnectionFactory, ResourceAdapterAssociation {
+		connectionFactory = ITestMailConnectionFactory.class, 
+		connectionFactoryImpl = TestMailConnectionFactoryImpl.class,
+		connection = ITestMailConnection.class, 
+		connectionImpl = TestMailConnectionImpl.class)
+public class TestMailManagedConnectionFactory implements ManagedConnectionFactory, ResourceAdapterAssociation {
 
 	/** The serial version UID */
 	private static final long serialVersionUID = 1L;
 
 	/** The logger */
-	private static Logger log = Logger.getLogger(GreenMailManagedConnectionFactory.class.getName());
+	private static Logger log = Logger.getLogger(TestMailManagedConnectionFactory.class.getName());
 
 	/** The resource adapter */
 	private ResourceAdapter ra;
@@ -63,7 +63,7 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 	/**
 	 * Default constructor
 	 */
-	public GreenMailManagedConnectionFactory() {
+	public TestMailManagedConnectionFactory() {
 
 	}
 
@@ -76,7 +76,7 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 	 */
 	public Object createConnectionFactory(final ConnectionManager cxManager) throws ResourceException {
 		log.finest("createConnectionFactory()");
-		return new GreenMailConnectionFactoryImpl(this, cxManager);
+		return new TestMailConnectionFactoryImpl(this, cxManager);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 	 */
 	public ManagedConnection createManagedConnection(final Subject subject, final ConnectionRequestInfo cxRequestInfo) throws ResourceException {
 		log.finest("createManagedConnection()");
-		return new GreenMailManagedConnection(this);
+		return new TestMailManagedConnection(this);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 		final Iterator it = connectionSet.iterator();
 		while (result == null && it.hasNext()) {
 			final ManagedConnection mc = (ManagedConnection) it.next();
-			if (mc instanceof GreenMailManagedConnection) {
+			if (mc instanceof TestMailManagedConnection) {
 				result = mc;
 			}
 
@@ -193,7 +193,7 @@ public class GreenMailManagedConnectionFactory implements ManagedConnectionFacto
 		if (other == this) {
 			return true;
 		}
-		if (!(other instanceof GreenMailManagedConnectionFactory)) {
+		if (!(other instanceof TestMailManagedConnectionFactory)) {
 			return false;
 		}
 		boolean result = true;

@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jrbsoft.jca.greenmail;
+package org.jrbsoft.jca.testmail;
 
 import java.util.logging.Logger;
 
@@ -33,19 +33,19 @@ import javax.resource.spi.ConnectionManager;
  * 
  * @version $Revision: $
  */
-public class GreenMailConnectionFactoryImpl implements IGreenMailConnectionFactory {
+public class TestMailConnectionFactoryImpl implements ITestMailConnectionFactory {
 	
 	/** The serial version UID */
 	private static final long serialVersionUID = 1L;
 
 	/** The logger */
-	private static Logger log = Logger.getLogger(GreenMailConnectionFactoryImpl.class.getName());
+	private static Logger log = Logger.getLogger(TestMailConnectionFactoryImpl.class.getName());
 
 	/** Reference */
 	private Reference reference;
 
 	/** ManagedConnectionFactory */
-	private GreenMailManagedConnectionFactory mcf;
+	private TestMailManagedConnectionFactory mcf;
 
 	/** ConnectionManager */
 	private ConnectionManager connectionManager;
@@ -53,7 +53,7 @@ public class GreenMailConnectionFactoryImpl implements IGreenMailConnectionFacto
 	/**
 	 * Default constructor
 	 */
-	public GreenMailConnectionFactoryImpl() {
+	public TestMailConnectionFactoryImpl() {
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class GreenMailConnectionFactoryImpl implements IGreenMailConnectionFacto
 	 * @param cxManager
 	 *            ConnectionManager
 	 */
-	public GreenMailConnectionFactoryImpl(final GreenMailManagedConnectionFactory mcf, final ConnectionManager cxManager) {
+	public TestMailConnectionFactoryImpl(final TestMailManagedConnectionFactory mcf, final ConnectionManager cxManager) {
 		this.mcf = mcf;
 		this.connectionManager = cxManager;
 	}
@@ -76,9 +76,9 @@ public class GreenMailConnectionFactoryImpl implements IGreenMailConnectionFacto
 	 * @exception ResourceException Thrown if a connection can't be obtained
 	 */
 	@Override
-	public IGreenMailConnection getConnection() throws ResourceException {
+	public ITestMailConnection getConnection() throws ResourceException {
 		log.finest("getConnection()");
-		return (IGreenMailConnection) connectionManager.allocateConnection(mcf, null);
+		return (ITestMailConnection) connectionManager.allocateConnection(mcf, null);
 	}
 
 	/**
